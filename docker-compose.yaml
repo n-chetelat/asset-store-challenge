@@ -1,0 +1,71 @@
+services:
+  # Backend services
+  backend_app1:
+    build: ./backend
+    ports:
+      - 3001:3000
+    volumes:
+      - ./backend:/usr/src/app
+    networks:
+      - store-network
+      - backend-internal-network
+  backend_app2:
+    build: ./backend
+    ports:
+      - 3002:3000
+    volumes:
+      - ./backend:/usr/src/app
+    networks:
+      - store-network
+      - backend-internal-network
+  backend_lb:
+    build: ./backend/loadbalancer
+    ports:
+      - 80:80
+    networks:
+      - backend-internal-network
+      - store-network
+    depends_on:
+      - backend_app1
+      - backend_app2
+
+  # Frontend services
+  frontend_app1:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    container_name: frontend_app1
+    ports:
+      - "3003:3000"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - PORT=3000
+    networks:
+      - frontend-internal-network
+      - store-network
+
+  frontend_lb:
+    image: nginx:latest
+    container_name: frontend_lb
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend_app1
+    networks:
+      - frontend-internal-network
+      - store-network
+
+  #Legacy third party service
+  legacy-backend:
+    image: matdurand/take-home-legacy-api-service
+    ports:
+      - 9991:9991
+    networks:
+      - store-network
+networks:
+  backend-internal-network: {}
+  frontend-internal-network: {}
+  store-network: {}
