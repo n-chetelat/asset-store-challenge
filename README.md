@@ -14,7 +14,7 @@ The current infrastructure has multiple instances of the backend with a load bal
 
 Note that the provided boilerplate assumes that you have Docker installed on your machine. If you do not have Docker installed yet please do so.
 
-1. Fork the challenge boilerplate from https://github.com/andersblom/store-challenge to a public repository on your personal Github account
+1. Fork the challenge boilerplate repo to a public repository on your personal Github account
 2. Clone your forked version of the repository onto your computer
 3. From the root of the repository run `docker compose up` to start all of the services.
 
