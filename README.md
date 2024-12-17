@@ -2,7 +2,7 @@
 
 This is the take home assignment for the fullstack position in the Assetstore team at Unity.
 
-Please fork this repo, complete the assignment, and send us the link to the repo.
+Please fork this repo, complete the assignment, and send us the link to the repo. If you do not want your submission to be public you can do it in a private repository. You will need to add `@andersblom` and `@matdurand` as collaborators so that we can access your solution.
 
 # Context
 
@@ -14,7 +14,7 @@ The current infrastructure has multiple instances of the backend with a load bal
 
 Note that the provided boilerplate assumes that you have Docker installed on your machine. If you do not have Docker installed yet please do so.
 
-1. Fork the challenge boilerplate repo to a public repository on your personal Github account
+1. Fork the challenge boilerplate repo to a repository on your personal Github account
 2. Clone your forked version of the repository onto your computer
 3. From the root of the repository run `docker compose up` to start all of the services.
 
