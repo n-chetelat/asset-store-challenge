@@ -2,7 +2,7 @@
 
 This is the take home assignment for the fullstack position in the Assetstore team at Unity.
 
-Please fork this repo, complete the assignment, and send us the link to the repo. If you do not want your submission to be public you can do it in a private repository. You will need to add `@andersblom` and `@matdurand` as collaborators so that we can access your solution.
+Please fork this repo, complete the assignment, and send us the link to the repo. If you do not want your submission to be public you can do it in a private repository. You will need to add `@andersblom` and `@matdurand` as collaborators so that we can access your solution. Alternatively, you can zip your project (please omit dependencies such as `node_modules`) and send us a link to a Google Drive/Dropbox/Onedrive upload.
 
 # Context
 
