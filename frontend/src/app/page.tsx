@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { Product } from '../lib/products'
-import { BACKEND_API_URL } from '@/lib/constants'
+import Link from "next/link";
+import { Product } from "@/lib/products";
+import { BACKEND_API_URL } from "@/lib/constants";
 
 export default async function Home() {
   const response = await fetch(`${BACKEND_API_URL}/products`);
@@ -12,13 +12,15 @@ export default async function Home() {
       <ul className="space-y-4">
         {products.map((product: Product) => (
           <li key={product.id} className="bg-white shadow rounded-lg p-4">
-            <Link href={`/products/${product.id}`} className="text-blue-600 hover:underline">
+            <Link
+              href={`/products/${product.id}`}
+              className="text-blue-600 hover:underline"
+            >
               {product.name}
             </Link>
           </li>
         ))}
       </ul>
     </div>
-  )
+  );
 }
-
