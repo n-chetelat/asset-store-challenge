@@ -1,6 +1,7 @@
 import express from "express";
 import { Keyv } from "keyv";
 import { createCache } from "cache-manager";
+import KeyvRedis from "@keyv/redis";
 import { check, validationResult } from "express-validator";
 
 const app = express();
@@ -9,7 +10,11 @@ const port = 3000;
 const LEGACY_SERVICE_API = "http://legacy-backend:9991/api";
 
 const cache = createCache({
-  stores: [new Keyv()],
+  stores: [
+    new Keyv({
+      store: new KeyvRedis("redis://redis_cache:6379"),
+    }),
+  ],
 });
 
 const productValidate = [
@@ -50,7 +55,11 @@ async function getAllProducts() {
     const url = `${LEGACY_SERVICE_API}/products`;
     const response = await fetch(url);
     const data = await response.json();
-    await cache.set("products", JSON.stringify(data?.products), 3600000);
+    const hi = await cache.set(
+      "products",
+      JSON.stringify(data?.products),
+      3600000
+    );
     products = data.products;
   } else {
     products = JSON.parse(productsStr as string);
@@ -68,11 +77,11 @@ async function getProduct(productId) {
     if (!productInfo) {
       return null;
     }
-    const price = await getPrice(productId);
+    const priceInfo = await getPrice(productId);
     product = {
       id: productInfo.id,
       name: productInfo.name,
-      price,
+      price: priceInfo.price,
     };
     await cache.set(`product-${productId}`, JSON.stringify(product), 3600000);
   } else {
