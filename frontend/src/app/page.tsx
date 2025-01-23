@@ -3,7 +3,9 @@ import { Product } from "@/lib/products";
 import { BACKEND_API_URL } from "@/lib/constants";
 
 export default async function Home() {
-  const response = await fetch(`${BACKEND_API_URL}/products`);
+  const response = await fetch(`${BACKEND_API_URL}/products`, {
+    cache: "force-cache",
+  });
   const products = await response.json();
 
   return (

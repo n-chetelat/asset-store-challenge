@@ -10,7 +10,9 @@ export default async function ProductPage({
 }) {
   const { id } = await params;
 
-  const response = await fetch(`${BACKEND_API_URL}/products/${id}`);
+  const response = await fetch(`${BACKEND_API_URL}/products/${id}`, {
+    cache: "force-cache",
+  });
   const product: Product = await response.json();
 
   if (!product) {
